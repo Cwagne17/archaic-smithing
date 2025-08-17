@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { CustomerPortalButton } from '@/components/CustomerPortalButton';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,12 +51,12 @@ const Header: React.FC = () => {
               </Link>
             ))}
           </nav>
-          <ThemeToggle />
+          <CustomerPortalButton />
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-2">
-          <ThemeToggle />
+          <CustomerPortalButton />
           <button
             className="p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}

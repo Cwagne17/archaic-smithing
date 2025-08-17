@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { iGalleryCategory } from '@/types';
-import { getDataClient } from '@/lib/dataClient';
+import { getDataClient, MockClient } from '@/lib/dataClient';
 import { GallerySection } from './GallerySection';
 import { Skeleton } from '@/components/ui';
 
@@ -26,8 +26,24 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({ className }) => {
         const sortedCategories = categoryList.sort((a, b) => a.order - b.order);
         setCategories(sortedCategories);
       } catch (err) {
-        setError('Failed to load gallery categories');
+        const errorMessage = err instanceof Error ? err.message : 'Failed to load gallery categories';
+        setError(errorMessage);
         console.error('Error loading categories:', err);
+
+        // Fallback to mock data if there's an error
+        if (errorMessage.includes('Amplify not configured')) {
+          console.warn('Amplify not configured, falling back to mock data');
+          // Force mock mode
+          try {
+            const mockClient = new MockClient();
+            const categoryList = await mockClient.listCategories();
+            const sortedCategories = categoryList.sort((a, b) => a.order - b.order);
+            setCategories(sortedCategories);
+            setError(''); // Clear error since we have fallback data
+          } catch (mockErr) {
+            console.error('Mock fallback also failed:', mockErr);
+          }
+        }
       } finally {
         setLoading(false);
       }

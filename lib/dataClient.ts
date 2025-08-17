@@ -272,8 +272,19 @@ class AmplifyClient implements iDataClient {
   }
 }
 
+// Export the MockClient class for fallback usage
+export { MockClient };
+
 // Factory function to get the appropriate client
 export function getDataClient(): iDataClient {
-  const isMockMode = process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
-  return isMockMode ? new MockClient() : new AmplifyClient();
+  // For development, always use MockClient unless explicitly disabled
+  // In production, you would set NEXT_PUBLIC_MOCK_MODE=false and configure Amplify
+  const useMockClient = process.env.NEXT_PUBLIC_MOCK_MODE !== 'false';
+
+  if (useMockClient) {
+    return new MockClient();
+  } else {
+    // Only use AmplifyClient in production with proper configuration
+    return new AmplifyClient();
+  }
 }

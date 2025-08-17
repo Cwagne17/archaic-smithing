@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { getDataClient } from '@/lib/dataClient';
+import { getDataClient, MockClient } from '@/lib/dataClient';
 import { iUser } from '@/types';
 import { Button, Card, CardHeader, CardTitle, CardContent } from '@/components/ui';
 import { isMockMode } from '@/lib/utils';
@@ -27,8 +27,23 @@ const AdminGuard: React.FC<AdminGuardProps> = ({ children }) => {
       const currentUser = await dataClient.currentUser();
       setUser(currentUser);
     } catch (err) {
-      setError('Failed to check authentication');
+      const errorMessage = err instanceof Error ? err.message : 'Failed to check authentication';
       console.error('Auth check error:', err);
+
+      // Fallback to mock client if there's an Amplify error
+      if (errorMessage.includes('Amplify not configured')) {
+        console.warn('Amplify not configured, falling back to mock client');
+        try {
+          const mockClient = new MockClient();
+          const currentUser = await mockClient.currentUser();
+          setUser(currentUser);
+        } catch (mockErr) {
+          setError('Failed to check authentication');
+          console.error('Mock fallback also failed:', mockErr);
+        }
+      } else {
+        setError('Failed to check authentication');
+      }
     } finally {
       setLoading(false);
     }
@@ -41,6 +56,13 @@ const AdminGuard: React.FC<AdminGuardProps> = ({ children }) => {
       if (dataClient.signInMockAdmin) {
         const mockUser = await dataClient.signInMockAdmin();
         setUser(mockUser);
+      } else {
+        // Fallback to using MockClient directly
+        const mockClient = new MockClient();
+        if (mockClient.signInMockAdmin) {
+          const mockUser = await mockClient.signInMockAdmin();
+          setUser(mockUser);
+        }
       }
     } catch (err) {
       setError('Failed to sign in');

@@ -33,5 +33,5 @@ export function validateEmail(email: string): boolean {
 }
 
 export function isMockMode(): boolean {
-  return process.env.NEXT_PUBLIC_MOCK_MODE === 'true';
+  return process.env.NEXT_PUBLIC_MOCK_MODE !== 'false';
 }

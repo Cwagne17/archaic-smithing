@@ -1,5 +1,9 @@
 export { AdminShell } from './AdminShell';
 export { AdminGuard } from './AdminGuard';
+export { AdminLayout } from './AdminLayout';
+export { AdminDashboard } from './AdminDashboard';
 export { CategoryManager } from './CategoryManager';
 export { ImageManager } from './ImageManager';
 export { RequestsManager } from './RequestsManager';
+export { StatsDashboard } from './StatsDashboard';
+export { EmailTemplateManager } from './EmailTemplateManager';

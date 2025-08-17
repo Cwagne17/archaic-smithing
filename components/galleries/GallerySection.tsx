@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { iGalleryCategory, iGalleryItem } from '@/types';
-import { getDataClient } from '@/lib/dataClient';
+import { getDataClient, MockClient } from '@/lib/dataClient';
 import { GalleryItemCard } from './GalleryItemCard';
 import { ItemDetailModal } from './ItemDetailModal';
 import { Skeleton, EmptyState } from '@/components/ui';
@@ -30,8 +30,22 @@ const GallerySection: React.FC<GallerySectionProps> = ({
         const categoryItems = await dataClient.listItemsByCategory(category.id);
         setItems(categoryItems);
       } catch (err) {
-        setError('Failed to load gallery items');
+        const errorMessage = err instanceof Error ? err.message : 'Failed to load gallery items';
+        setError(errorMessage);
         console.error('Error loading gallery items:', err);
+
+        // Fallback to mock data if there's an error
+        if (errorMessage.includes('Amplify not configured')) {
+          console.warn('Amplify not configured, falling back to mock data');
+          try {
+            const mockClient = new MockClient();
+            const categoryItems = await mockClient.listItemsByCategory(category.id);
+            setItems(categoryItems);
+            setError(''); // Clear error since we have fallback data
+          } catch (mockErr) {
+            console.error('Mock fallback also failed:', mockErr);
+          }
+        }
       } finally {
         setLoading(false);
       }

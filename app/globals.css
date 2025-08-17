@@ -3,7 +3,6 @@
 :root {
   /* Brand Colors */
   --color-accent: #7c0202;
-  --color-accent-dark: #b91c1c; /* Better contrast for dark mode */
   --color-black: #000000;
   --color-white: #ffffff;
   --color-gray-500: #888888;
@@ -43,27 +42,6 @@
   --radius: 0.5rem;
 }
 
-.dark {
-  /* Dark Mode Colors - Improved for 508 compliance */
-  --background: var(--color-gray-900);
-  --foreground: var(--color-gray-50);
-  --muted: var(--color-gray-800);
-  --muted-foreground: var(--color-gray-400);
-  --border: var(--color-gray-700);
-  --input: var(--color-gray-800);
-  --primary: var(--color-accent-dark); /* Better contrast */
-  --primary-foreground: var(--color-white);
-  --secondary: var(--color-gray-800);
-  --secondary-foreground: var(--color-gray-100);
-  --card: var(--color-gray-800);
-  --card-foreground: var(--color-gray-50);
-  
-  /* Dark mode shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-}
 
 @theme inline {
   /* Colors */
@@ -168,14 +146,6 @@ a:hover {
   text-underline-offset: 4px;
 }
 
-/* Dark mode link improvements */
-.dark a {
-  color: var(--color-accent-dark);
-}
-
-.dark a:hover {
-  color: var(--color-white);
-}
 
 /* Image Optimizations */
 img {
@@ -247,26 +217,17 @@ img {
   background: var(--color-gray-100);
 }
 
-.dark ::-webkit-scrollbar-track {
-  background: var(--color-gray-800);
-}
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-gray-300);
   border-radius: 4px;
 }
 
-.dark ::-webkit-scrollbar-thumb {
-  background: var(--color-gray-600);
-}
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gray-400);
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gray-500);
-}
 
 /* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
@@ -286,8 +247,4 @@ img {
     --border: #000000;
   }
   
-  .dark {
-    --primary: #ffffff;
-    --border: #ffffff;
-  }
 }
