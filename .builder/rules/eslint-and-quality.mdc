@@ -1,0 +1,18 @@
+# .builder/rules/eslint-and-quality.mdc
+---
+description: Linting & quality gates
+alwaysApply: true
+---
+
+Standards:
+- Code must pass ESLint with Next.js + TypeScript rules.
+- No unused vars/imports; no `any`; no `// @ts-ignore` unless justified with a comment.
+
+React:
+- Follow Rules of Hooks.
+- Lists require a stable `key`.
+- Prefer function components; avoid legacy patterns.
+
+Formatting:
+- Follow project Prettier settings (quotes, semicolons, trailing commas).
+- Keep components small and focused; extract helpers to `lib/**`.

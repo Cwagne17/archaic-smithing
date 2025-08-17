@@ -1,0 +1,16 @@
+# .builder/rules/accessibility.mdc
+---
+description: Accessibility baseline (a11y)
+alwaysApply: true
+---
+
+General:
+- Provide `alt` on images; `alt=""` only if decorative.
+- Use semantic elements (`button`, `nav`, `main`, `header`, `footer`, `section`, `form`, `label`).
+- Ensure label association for inputs; use `aria-*` only when semantics aren’t available.
+
+Focus:
+- All interactive elements must be keyboard accessible and show a visible focus state (Tailwind `focus:*` utilities).
+
+Color/contrast:
+- Choose Tailwind colors that meet WCAG AA contrast for text.

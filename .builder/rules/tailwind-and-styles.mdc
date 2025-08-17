@@ -1,0 +1,17 @@
+# .builder/rules/tailwind-and-styles.mdc
+---
+description: Styling with Tailwind and minimal CSS Modules
+alwaysApply: true
+---
+
+Tailwind:
+- Import `styles/globals.css` in `app/layout.tsx` and include `@tailwind base; @tailwind components; @tailwind utilities;`.
+- Use Tailwind utility classes for spacing, layout, color, typography.
+- Avoid inline `style` and global CSS for component-specific styling.
+
+CSS Modules:
+- If a component needs non-trivial styles, create `Component.module.css`, import locally, and combine with Tailwind classes as needed.
+
+Design:
+- Ensure responsive classes (`sm: md: lg:`) for layout components.
+- Use semantic HTML and accessible patterns (labels, roles, focus states).

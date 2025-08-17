@@ -1,0 +1,24 @@
+# .builder/rules/testing-and-mocks.mdc
+---
+description: Tests and mock data placement
+globs:
+  - tests/**
+alwaysApply: true
+---
+
+Mock data:
+- For every new interface representing API data, create a matching mock in `tests/mockData/`.
+- Mocks must conform to the interface and be exported for reuse.
+
+Example:
+```ts
+// tests/mockData/products.ts
+import type { Product } from '@/types/iProduct';
+export const sampleProducts: Product[] = [
+  { id: 'p1', name: 'Widget', price: 19.99 },
+];
+```
+
+Components:
+- When generating a component that consumes data, reference mocks in examples/stories/tests.
+- Keep test IDs (data-testid) on interactive elements that require selection in tests.

@@ -1,0 +1,19 @@
+# .builder/rules/fonts-and-images.mdc
+---
+description: Fonts and image optimization
+alwaysApply: true
+---
+
+Fonts:
+- Use `next/font` to load fonts. Apply the font class to `<body>` in `app/layout.tsx`.
+- Keep font config in `styles/fonts.ts`.
+
+Images:
+- Use `next/image` for all images with `alt` text.
+- Prefer assets in `public/` and reference via `/path.ext` or import and pass to `<Image>`.
+
+Example:
+```tsx
+import Image from 'next/image';
+<Image src="/hero.png" alt="Hero illustration" width={960} height={540} priority />
+```

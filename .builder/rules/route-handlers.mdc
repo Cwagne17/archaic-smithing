@@ -1,0 +1,29 @@
+# .builder/rules/route-handlers.mdc
+---
+description: Route handlers (app/api) and typing
+alwaysApply: true
+---
+
+For each `route.ts`:
+- Export functions named after HTTP methods (GET, POST, PUT, DELETE).
+- Use `NextRequest`/`NextResponse` (or standard `Request`/`Response`) and **typed bodies**.
+
+Typing:
+- Create/Update interfaces in `types/`:
+  - `i{Entity}Request.ts` — request body (if applicable)
+  - `i{Entity}Response.ts` — response JSON
+
+Example:
+```ts
+// app/api/products/route.ts
+import { NextResponse } from 'next/server';
+import type { ProductListResponse } from '@/types/iProduct';
+
+export async function GET() {
+  const data: ProductListResponse = { products: [] };
+  return NextResponse.json(data);
+}
+```
+
+Mocks:
+- Create matching mock JSON in tests/mockData/ (e.g., tests/mockData/products.ts) conforming to response interfaces.

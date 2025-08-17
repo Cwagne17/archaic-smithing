@@ -1,0 +1,26 @@
+---
+description: TypeScript Rules
+alwaysApply: true
+---
+
+Type safety:
+- Define an interface or type for **every** data structure (component props, API request/response, models).
+- Place shared interfaces/types under `types/` with filename prefix `i` (e.g., `types/iOrder.ts`).
+- Component prop interfaces may be colocated **or** shared; prefer shared when reused.
+- No `any`. Use precise types, `unknown` + narrowing, or generics.
+- Prefer `interface` for object shapes; use `type` for unions, utility types, and function signatures.
+- Interfaces/types use **PascalCase** (e.g., `User`, `OrderItem`, `ContactFormData`).
+
+Component props:
+- Always define and use a props interface:
+  ```ts
+  // components/product/ProductCard.tsx
+  import type { Product } from '@/types/iProduct';
+
+  interface ProductCardProps {
+    product: Product;
+    onSelect?: (id: string) => void;
+  }
+  export default function ProductCard({ product, onSelect }: ProductCardProps) {/*...*/}
+  ```
+- For each route.ts, create interfaces for RequestBody and ResponseBody in types/ and import them.

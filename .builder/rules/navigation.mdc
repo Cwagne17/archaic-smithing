@@ -1,0 +1,24 @@
+# .builder/rules/navigation.mdc
+---
+description: Navigation and linking
+alwaysApply: true
+---
+
+Internal links:
+- Always use `next/link`:
+  ```tsx
+  import Link from 'next/link';
+  <Link href="/dashboard/settings">Settings</Link>
+  ```
+  
+Programmatic nav:
+- Use next/navigation in App Router client components:
+    ```tsx
+    'use client';
+    import { useRouter } from 'next/navigation';
+    const r = useRouter(); r.push('/login');
+    ```
+
+Dynamic routes:
+- Use useParams() for params in Client Components.
+- Use notFound() for missing entities; implement not-found.tsx.

@@ -1,0 +1,24 @@
+# .builder/rules/data-fetching.mdc
+---
+description: Data fetching & separation of concerns
+alwaysApply: true
+---
+
+Server vs client:
+
+- Prefer **Server Components** for initial data fetches with `await fetch(...)` (RSC).
+- Use client-side fetching (SWR/React Query or `useEffect`) for interactive updates.
+
+Config:
+
+- Centralize API base URL and endpoints in `lib/config.ts`.
+- All fetchers live in `lib/api/*.ts` with typed inputs/outputs.
+
+Error/loading:
+
+- Use `loading.tsx` and `error.tsx` in route segments.
+- Avoid throwing raw errors from client code; surface user-friendly messages.
+
+Caching:
+
+- Be explicit with `fetch` cache/revalidate options when needed; otherwise default to dynamic.

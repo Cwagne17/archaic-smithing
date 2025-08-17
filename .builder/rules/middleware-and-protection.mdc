@@ -1,0 +1,16 @@
+# .builder/rules/middleware-and-protection.mdc
+---
+description: Middleware and route protection
+globs:
+  - middleware.ts
+  - app/**
+alwaysApply: true
+---
+
+Middleware:
+- Use `middleware.ts` to guard protected segments (e.g., `/dashboard/**`).
+- Read auth signals (cookie/header) and `NextResponse.redirect()` if missing.
+
+Server-only code:
+- Keep secrets and server-only logic out of Client Components.
+- Never expose private env vars to the client.
